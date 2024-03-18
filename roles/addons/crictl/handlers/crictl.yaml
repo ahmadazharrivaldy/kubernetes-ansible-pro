@@ -1,0 +1,36 @@
+---
+- name: Check if crictl already downloaded
+  local_action:
+    module: stat
+    path: /tmp/crictl.tar.gz
+  register: crictl_release
+
+- name: Download crictl release
+  local_action:
+    module: get_url
+    url: "{{ addons.crictl.download_url | default('https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.28.0/crictl-v1.28.0-linux-amd64.tar.gz') }}"
+    dest: /tmp/crictl.tar.gz
+  environment: "{{ proxy | default({}) }}"
+  when: not crictl_release.stat.exists
+
+- name: Extract crictl release
+  local_action:
+    module: unarchive
+    copy: true
+    src: /tmp/crictl.tar.gz
+    dest: /tmp
+
+- name: Copy crictl binary file
+  copy:
+    src: /tmp/crictl
+    dest: "/usr/local/bin/{{ addons.crictl.binary_name | default('crictl') }}"
+    mode: 0777
+
+- name: Removing crictl archived files
+  local_action:
+    module: file
+    path: "{{ item }}"
+    state: absent
+  with_items:
+  - /tmp/crictl.tar.gz
+  - /tmp/crictl

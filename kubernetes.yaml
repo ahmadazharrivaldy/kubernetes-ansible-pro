@@ -17,6 +17,7 @@
   vars_files:
   - variables.yaml
   roles:
+  - { role: addons/crictl, tags: crictl}
   - { role: container-engine, tags: install-cri }
   - { role: kubernetes/install, tags: install-kubernetes }
 
