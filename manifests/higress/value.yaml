@@ -1,0 +1,25 @@
+global:
+  enableIstioAPI: true
+higress-console:
+  domain: <DOMAIN_NAME>
+  tolerations:
+    effect: NoSchedule
+    operator: Exists
+    key: node-role.kubernetes.io/ingress-node
+  o11y:
+    enabled: true
+higress-core:  
+  gateway:  
+    service:  
+      type: NodePort
+    tolerations:
+      effect: NoSchedule
+      operator: Exists
+      key: node-role.kubernetes.io/ingress-node
+  controller:
+    tolerations:
+      effect: NoSchedule
+      operator: Exists
+      key: node-role.kubernetes.io/ingress-node
+  skywalking:
+    enabled: true

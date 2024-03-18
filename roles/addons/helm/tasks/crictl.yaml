@@ -1,0 +1,20 @@
+---
+- name: Check if crictl enabled
+  debug:
+    msg: "Checking right now"
+  notify:
+  - Check if crictl already downloaded
+  - Download crictl release
+  - Extract crictl release
+  - Copy crictl binary file
+  - Removing crictl archived files
+  changed_when: addons.crictl.enabled | default(false)
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Removing crictl binary if disabled
+  file:
+    path: "/usr/local/bin/{{ addons.crictl.binary_name | default('crictl') }}"
+    state: absent
+  when: not addons.crictl.enabled | default(true)

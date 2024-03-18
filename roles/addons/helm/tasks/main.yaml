@@ -1,0 +1,4 @@
+---
+- import_tasks: helm2.yaml
+- import_tasks: helm3.yaml
+- import_tasks: crictl.yaml

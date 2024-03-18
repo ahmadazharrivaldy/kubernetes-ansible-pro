@@ -1,0 +1,27 @@
+all:
+  hosts:
+    node1:
+      ansible_host: 10.0.10.10
+      ansible_name: master-01
+    node2:
+      ansible_host: 10.0.10.11
+      ansible_name: master-02
+    node3:
+      ansible_host: 10.0.10.12
+      ansible_name: worker-01
+    node4:
+      ansible_host: 10.0.10.13
+      ansible_name: worker-02
+  children:
+    control_plane:
+      hosts:
+        node1:
+        node2:
+    workers:
+      hosts:
+        node3:
+        node4:
+    k8s_cluster:
+      children:
+        control_plane:
+        workers:
