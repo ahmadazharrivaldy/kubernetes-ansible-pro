@@ -22,4 +22,6 @@
     - traceroute
     - tree
     - unzip
+    - socat
+    - conntrack
   environment: "{{ proxy | default({}) }}"
