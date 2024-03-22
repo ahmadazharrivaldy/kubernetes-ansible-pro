@@ -16,22 +16,6 @@ data:
         prometheus :9253
         health 169.254.20.10:9254
     }
-    bri.co.id:53 {
-        errors
-        forward . 172.18.94.233 172.19.94.233 {
-            force_tcp
-            policy sequential
-        }
-        cache {
-            success 9984 3600
-            denial 9984 5
-        }
-        log
-        loop
-        bind 169.254.20.10
-        prometheus :9253
-        reload
-    }
     in-addr.arpa:53 {
         errors
         cache 30
