@@ -8,7 +8,7 @@
 - name: Download crictl release
   local_action:
     module: get_url
-    url: "{{ addons.crictl.download_url | default('https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.28.0/crictl-v1.28.0-linux-amd64.tar.gz') }}"
+    url: "{{ addons.crictl.download_url }}"
     dest: /tmp/crictl.tar.gz
   environment: "{{ proxy | default({}) }}"
   when: not crictl_release.stat.exists

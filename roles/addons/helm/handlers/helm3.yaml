@@ -8,7 +8,7 @@
 - name: Download Helm3 release
   local_action:
     module: get_url
-    url: "{{ addons.helm3.download_url | default('https://get.helm.sh/helm-v' + addons.helm3.version + '-linux-amd64.tar.gz') }}"
+    url: "{{ addons.helm3.download_url }}"
     dest: /tmp/helm.tar.gz
   environment: "{{ proxy | default({}) }}"
   when: not helm_release.stat.exists
