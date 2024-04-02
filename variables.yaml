@@ -53,7 +53,7 @@ kubernetes:
   #    cpu: 1000m
   #    memory: 1Gi
   proxy:
-    enabled: false
+    enabled: true
   subnets:
     pod: 10.244.0.0/16
     service: 10.96.0.0/12
